@@ -4,6 +4,9 @@ plugins {
     id("kotlin-kapt")
     // For Hilt
     id("com.google.dagger.hilt.android")
+    alias(libs.plugins.jetbrainsKotlinPluginSerialization)
+    alias(libs.plugins.jetbrainsCompose)
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -43,7 +46,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.13"
+        kotlinCompilerExtensionVersion = "1.5.15"
     }
     packaging {
         resources {

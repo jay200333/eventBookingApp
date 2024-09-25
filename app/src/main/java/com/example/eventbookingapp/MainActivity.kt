@@ -5,25 +5,18 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavGraph
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navDeepLink
-import androidx.navigation.toRoute
-import com.example.eventbookingapp.main.MainScreen
+import com.example.eventbookingapp.view.main.MainScreen
 import com.example.eventbookingapp.ui.theme.EventBookingAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.serialization.Serializable
 
-@Serializable
-data class Main(val test: String)
-
-object Game
-object Stage1
-object Stage2
-object Result
+data class Test(
+    val s: String,
+    val n: Int
+)
 
 // Hilt 사용 Annotation
 // 해당 어노테이션이 있으면 하위 레벨에서 종속 항목을 가져오는 것이 가능합니다.
@@ -42,53 +35,10 @@ class MainActivity : ComponentActivity() {
                 NavHost(
                     modifier = Modifier.fillMaxSize(),
                     navController = navController,
-                    startDestination = ""
+                    startDestination = HomeScreenRoute
                 ) {
-                    // TODO()
-                    // NavGraphBuilder Ramda
-                    composable<Main>(
-                        deepLinks = listOf(
-                            navDeepLink {
-                                uriPattern = "ada://main"
-                            }
-                        )
-                    ) {
-                        val data: Main = it.toRoute<Main>()
+                    composable<HomeScreenRoute> {
                         MainScreen()
-                    }
-
-                    navigation<Game>(startDestination = Stage1) {
-                        composable<Stage1>(
-                            deepLinks = listOf(
-                                navDeepLink {
-                                    uriPattern = "ada://main"
-                                }
-                            )
-                        ) {
-                            val data: Main = it.toRoute<Main>()
-                            MainScreen()
-                        }
-                        composable<Stage2>(
-                            deepLinks = listOf(
-                                navDeepLink {
-                                    uriPattern = "ada://main"
-                                }
-                            )
-                        ) {
-                            val data: Main = it.toRoute<Main>()
-                            MainScreen()
-                        }
-                        composable<Result>(
-                            deepLinks = listOf(
-                                navDeepLink {
-                                    uriPattern = "ada://main"
-                                }
-                            )
-                        ) {
-                            navController.navigate(Main::class.java) {
-                                popUpTo<Game>()
-                            }
-                        }
                     }
                 }
             }
