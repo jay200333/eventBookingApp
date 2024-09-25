@@ -1,3 +1,10 @@
+import org.jetbrains.kotlin.gradle.targets.js.npm.importedPackageDir
+import java.io.FileInputStream
+import java.util.Properties
+
+var properties = Properties()
+properties.load(FileInputStream("local.properties"))
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -24,6 +31,8 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        buildConfigField("String", "kakaoNativeAppKey", properties.getProperty("kakaoNativeAppKey"))
     }
 
     buildTypes {
@@ -44,6 +53,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.15"
@@ -57,6 +67,8 @@ android {
 
 dependencies {
     val nav_version = "2.8.1"
+    val room_version = "2.6.1"
+    val material3_version = "1.3.0"
 
     implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.6")
@@ -77,11 +89,26 @@ dependencies {
     // For Compose Navigation
     implementation("androidx.navigation:navigation-compose:$nav_version")
 
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.1")
+    // 직렬화
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
 
     // For Hilt
     implementation("com.google.dagger:hilt-android:2.44")
     kapt("com.google.dagger:hilt-android-compiler:2.44")
+
+    // For Room
+    implementation("androidx.room:room-runtime:$room_version")
+    annotationProcessor("androidx.room:room-compiler:$room_version")
+    // Kotlin Extensions and Coroutines support for Room
+    implementation("androidx.room:room-ktx:$room_version")
+    // optional - Paging 3 Integration
+    implementation("androidx.room:room-paging:$room_version")
+
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation("androidx.navigation:navigation-compose:$nav_version")
+    implementation("androidx.compose.material:material:1.7.2")
+
+    implementation("com.kakao.maps.open:android:2.11.9")
 }
 
 // Allow references to generated code
