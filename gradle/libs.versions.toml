@@ -1,13 +1,11 @@
 [versions]
 android-version = "2.11.9"
-compose-bom = "2024.09.02"
 compose-bom-version = "2024.09.03"
 converter-gson-version = "2.9.0"
 datastore-preferences-version = "1.1.1"
 espresso-core-version = "3.6.1"
-gson-version = "2.11.0"
-hilt-android-compiler-version = "2.44"
-hilt-android-version = "2.44"
+hilt-android-compiler-version = "2.52"
+hilt-android-version = "2.52"
 junit = "1.2.1"
 junit-version = "4.13.2"
 kotlin = "2.0.0"
@@ -64,4 +62,5 @@ slf4j-api = { module = "org.slf4j:slf4j-api", version.ref = "slf4j-api-version" 
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 jetbrainsKotlinPluginSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "serialization" }
 jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
-kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version = "2.0.0-1.0.23" }
+dagger-hilt = { id = "com.google.dagger.hilt.android", version = "2.51.1" }

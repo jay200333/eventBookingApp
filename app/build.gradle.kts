@@ -10,7 +10,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
     // For Hilt
-    id("com.google.dagger.hilt.android")
+    alias(libs.plugins.dagger.hilt)
     alias(libs.plugins.jetbrainsKotlinPluginSerialization)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
