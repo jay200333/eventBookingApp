@@ -105,6 +105,10 @@ dependencies {
     implementation(libs.androidx.material)
 
     implementation(libs.android)
+    implementation(libs.retrofit)
+    implementation(libs.okhttp)
+    implementation(libs.converter.gson)
+    implementation(libs.androidx.datastore.preferences)
 }
 
 // Allow references to generated code
