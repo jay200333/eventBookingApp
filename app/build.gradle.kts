@@ -109,6 +109,8 @@ dependencies {
     implementation(libs.okhttp)
     implementation(libs.converter.gson)
     implementation(libs.androidx.datastore.preferences)
+    implementation(libs.kotlin.logging.jvm)
+    implementation(libs.slf4j.api)
 }
 
 // Allow references to generated code
