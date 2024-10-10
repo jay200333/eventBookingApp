@@ -9,6 +9,18 @@ import java.util.logging.Logger
 
 @HiltAndroidApp
 class EventBookingApplication: Application() {
+    companion object {
+        private lateinit var instance: EventBookingApplication
+
+        fun applicationContext(): Context {
+            return instance.applicationContext
+        }
+    }
+
+    init {
+        instance = this
+    }
+
     override fun onCreate() {
         super.onCreate()
 

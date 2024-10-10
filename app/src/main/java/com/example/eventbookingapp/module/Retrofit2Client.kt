@@ -1,8 +1,11 @@
 package com.example.eventbookingapp.module
 
 import com.example.eventbookingapp.EventBookingApplication
+import com.example.eventbookingapp.config.cacheSize
 import com.example.eventbookingapp.config.logger
 import dagger.hilt.android.qualifiers.ApplicationContext
+import okhttp3.Cache
+import okhttp3.CacheControl
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
@@ -11,15 +14,24 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object Retrofit2Client {
     val client: Retrofit = initClient()
-    private val interceptorClient = OkHttpClient()
+    /**
+    Set File application cache file directory
+    size : 3MB
+     */
+    private val cache = Cache(
+        EventBookingApplication.applicationContext().cacheDir,
+        cacheSize
+    )
+    private val okHttpClient = OkHttpClient()
         .newBuilder()
+        .cache(cache)
         .addInterceptor(LoggingInterceptor())
         .build()
 
     private fun initClient(): Retrofit {
         return Retrofit.Builder()
             .baseUrl("")
-            .client(interceptorClient)
+            .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
