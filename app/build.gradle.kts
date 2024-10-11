@@ -95,6 +95,7 @@ dependencies {
 
     // 직렬화
     implementation(libs.kotlinx.serialization.json)
+    // test code
 
     // For Hilt
     implementation(libs.hilt.android)
@@ -108,6 +109,7 @@ dependencies {
     implementation(libs.androidx.room.ktx)
     // optional - Paging 3 Integration
     implementation(libs.androidx.room.paging)
+    // test22222
 
     implementation(libs.retrofit)
     implementation(libs.androidx.navigation.compose)
