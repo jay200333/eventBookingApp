@@ -91,6 +91,7 @@ dependencies {
     // For Hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
 
     // For Room
     implementation(libs.androidx.room.runtime)
@@ -111,6 +112,9 @@ dependencies {
     implementation(libs.androidx.datastore.preferences)
     implementation(libs.kotlin.logging.jvm)
     implementation(libs.slf4j.api)
+    implementation(libs.play.services.location)
+    implementation(libs.gson)
+    implementation(libs.slf4j.simple)
 }
 
 // Allow references to generated code

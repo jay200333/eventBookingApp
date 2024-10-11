@@ -8,3 +8,6 @@ val logger = KotlinLogging.logger {}
 val Context.userDataStore by preferencesDataStore(
     name = USER_PREFERENCES_KEY
 )
+val Context.locationDataStore by preferencesDataStore(
+    name = LOCATION_PREFERENCES_KEY
+)

@@ -1,5 +1,6 @@
 package com.example.eventbookingapp.view.main
 
+import androidx.activity.result.ActivityResultLauncher
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
@@ -23,9 +24,13 @@ import com.example.eventbookingapp.MyPageScreenRoute
 import com.example.eventbookingapp.R
 import com.example.eventbookingapp.ScreenRouter
 import com.example.eventbookingapp.view.main.components.BottomNavIcon
+import com.google.android.gms.location.FusedLocationProviderClient
 
 @Composable
-fun MainScreen() {
+fun MainScreen(
+    client: FusedLocationProviderClient,
+    locationPermissionLauncher: ActivityResultLauncher<Array<String>>
+) {
     val bottomNavController = rememberNavController()
 
     Scaffold(
@@ -34,7 +39,7 @@ fun MainScreen() {
             val navBackStackEntry by bottomNavController.currentBackStackEntryAsState()
             val currentDestination = navBackStackEntry?.destination
             val navList = listOf(
-                HomeScreenRoute, MapScreenRoute, MyPageScreenRoute
+                HomeScreenRoute, MapScreenRoute
             )
 
             BottomNavigation {
@@ -76,13 +81,10 @@ fun MainScreen() {
             startDestination = HomeScreenRoute
         ) {
             composable<HomeScreenRoute> {
-                HomeScreen()
+                HomeScreen(client = client, locationPermissionLauncher = locationPermissionLauncher)
             }
             composable<MapScreenRoute> {
                 MapScreen()
-            }
-            composable<MyPageScreenRoute> {
-                MyPageScreen()
             }
         }
     }

@@ -1,7 +1,9 @@
 package com.example.eventbookingapp.module
 
 import com.example.eventbookingapp.BuildConfig
+import com.example.eventbookingapp.repository.implementation.LocationRepositoryImpl
 import com.example.eventbookingapp.repository.implementation.TokenRepositoryImpl
+import com.example.eventbookingapp.repository.repository_interface.LocationRepository
 import com.example.eventbookingapp.repository.repository_interface.TokenRepository
 import dagger.Module
 import dagger.Provides
@@ -28,4 +30,8 @@ object RepositoryModule {
         }
         return TokenRepositoryImpl(dispatchers)
     }
+
+    @Provides
+    @Singleton
+    fun provideLocationRepository(): LocationRepository = LocationRepositoryImpl()
 }
