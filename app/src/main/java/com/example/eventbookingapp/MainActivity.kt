@@ -27,6 +27,7 @@ import javax.inject.Inject
 class MainActivity : ComponentActivity() {
     @Inject lateinit var locationModule: LocationModuleInterface
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    val testVariable = "test!!"
 
     private val locationPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
