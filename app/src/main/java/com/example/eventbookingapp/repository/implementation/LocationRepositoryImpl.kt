@@ -1,6 +1,7 @@
 package com.example.eventbookingapp.repository.implementation
 
 import android.location.Location
+import android.os.Parcel
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.example.eventbookingapp.EventBookingApplication
@@ -30,8 +31,15 @@ class LocationRepositoryImpl(
                 val location: Location? = if (data == null) {
                     null
                 } else {
-                    val convert = Gson().fromJson(data, Location::class.java)
-                    Location(convert)
+                    val list = data.split(",")
+                    val convert = Location(list[0])
+
+                    convert.latitude = list[1].toDouble()
+                    convert.longitude = list[2].toDouble()
+                    convert.altitude = list[3].toDouble()
+                    convert.accuracy = list[4].toFloat()
+
+                    convert
                 }
 
                 emit(location)
@@ -44,10 +52,12 @@ class LocationRepositoryImpl(
 
         CoroutineScope(ioDispatcher).launch {
             context.locationDataStore.edit {
-                val convert = Gson().toJson(location)
-
-                it[stringPreferencesKey(locationKey)] = convert
+                it[stringPreferencesKey(locationKey)] = locationToString(location)
             }
         }
+    }
+
+    private fun locationToString(location: Location): String {
+        return "${location.provider},${location.latitude},${location.longitude},${location.altitude},${location.accuracy}"
     }
 }
